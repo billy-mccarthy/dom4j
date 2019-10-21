@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 /**
  * @author Filip Jirsák
  */
-public class AllowedCharsTest extends TestCase{
+public class AllowedCharsTest extends TestCase {
 
     public void testLocalName() {
         QName.get("element");
@@ -18,7 +18,8 @@ public class AllowedCharsTest extends TestCase{
         try {
             QName.get("!element");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testQname() {
@@ -30,7 +31,8 @@ public class AllowedCharsTest extends TestCase{
         try {
             QName.get("ns:elem:ent", "http://example.com/namespace");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
 
@@ -38,28 +40,32 @@ public class AllowedCharsTest extends TestCase{
         try {
             QName.get(":nselement", "http://example.com/namespace");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void tryCreateElementLT() {
         try {
             DocumentHelper.createElement("element<name");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testCreateElementGT() {
         try {
             DocumentHelper.createElement("element>name");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testCreateElementAmpersand() {
         try {
             DocumentHelper.createElement("element&name");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testAddElement() {
@@ -67,7 +73,8 @@ public class AllowedCharsTest extends TestCase{
             Element root = DocumentHelper.createElement("root");
             root.addElement("element>name");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testAddElementQualified() {
@@ -75,7 +82,8 @@ public class AllowedCharsTest extends TestCase{
             Element root = DocumentHelper.createElement("root");
             root.addElement("element>name", "http://example.com/namespace");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testAddElementQualifiedPrefix() {
@@ -83,7 +91,8 @@ public class AllowedCharsTest extends TestCase{
             Element root = DocumentHelper.createElement("root");
             root.addElement("ns:element>name", "http://example.com/namespace");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testAddElementPrefix() {
@@ -91,7 +100,8 @@ public class AllowedCharsTest extends TestCase{
             Element root = DocumentHelper.createElement("root");
             root.addElement("ns>:element", "http://example.com/namespace");
             fail("Expected IllegalArgumentException.class but no exception occurred.");
-        } catch (IllegalArgumentException e){}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     //TODO It is illegal to create element or attribute with namespace prefix and empty namespace IRI.
