@@ -8,7 +8,7 @@ import junit.framework.TestCase;
  */
 public class AllowedCharsTest extends TestCase{
 
-    public void localName() {
+    public void testLocalName() {
         QName.get("element");
         QName.get(":element");
         QName.get("elem:ent");
