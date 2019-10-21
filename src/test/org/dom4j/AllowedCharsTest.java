@@ -1,76 +1,97 @@
 package org.dom4j;
 
-import org.testng.annotations.Test;
+
+import junit.framework.TestCase;
 
 /**
  * @author Filip Jirsák
  */
-public class AllowedCharsTest {
-    @Test
+public class AllowedCharsTest extends TestCase{
+
     public void localName() {
         QName.get("element");
         QName.get(":element");
         QName.get("elem:ent");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void localNameFail() {
-        QName.get("!element");
+    public void testLocalNameFail() {
+        try {
+            QName.get("!element");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test
-    public void qname() {
+    public void testQname() {
         QName.get("element", "http://example.com/namespace");
         QName.get("ns:element", "http://example.com/namespace");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void qnameFail1() {
-        QName.get("ns:elem:ent", "http://example.com/namespace");
+    public void testQnameFail1() {
+        try {
+            QName.get("ns:elem:ent", "http://example.com/namespace");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void qnameFail2() {
-        QName.get(":nselement", "http://example.com/namespace");
+
+    public void testQnameFail2() {
+        try {
+            QName.get(":nselement", "http://example.com/namespace");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void createElementLT() {
-        DocumentHelper.createElement("element<name");
+    public void tryCreateElementLT() {
+        try {
+            DocumentHelper.createElement("element<name");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void createElementGT() {
-        DocumentHelper.createElement("element>name");
+    public void testCreateElementGT() {
+        try {
+            DocumentHelper.createElement("element>name");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void createElementAmpersand() {
-        DocumentHelper.createElement("element&name");
+    public void testCreateElementAmpersand() {
+        try {
+            DocumentHelper.createElement("element&name");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void addElement() {
-        Element root = DocumentHelper.createElement("root");
-        root.addElement("element>name");
+    public void testAddElement() {
+        try {
+            Element root = DocumentHelper.createElement("root");
+            root.addElement("element>name");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void addElementQualified() {
-        Element root = DocumentHelper.createElement("root");
-        root.addElement("element>name", "http://example.com/namespace");
+    public void testAddElementQualified() {
+        try {
+            Element root = DocumentHelper.createElement("root");
+            root.addElement("element>name", "http://example.com/namespace");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void addElementQualifiedPrefix() {
-        Element root = DocumentHelper.createElement("root");
-        root.addElement("ns:element>name", "http://example.com/namespace");
+    public void testAddElementQualifiedPrefix() {
+        try {
+            Element root = DocumentHelper.createElement("root");
+            root.addElement("ns:element>name", "http://example.com/namespace");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void addElementPrefix() {
-        Element root = DocumentHelper.createElement("root");
-        root.addElement("ns>:element", "http://example.com/namespace");
+    public void testAddElementPrefix() {
+        try {
+            Element root = DocumentHelper.createElement("root");
+            root.addElement("ns>:element", "http://example.com/namespace");
+            fail("Expected IllegalArgumentException.class but no exception occurred.");
+        } catch (IllegalArgumentException e){}
     }
 
     //TODO It is illegal to create element or attribute with namespace prefix and empty namespace IRI.
